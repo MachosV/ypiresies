@@ -1,0 +1,36 @@
+{{define "content"}}
+<div class="formbox">
+    <form action="/createypiresia" method="POST">
+        <div class="form-item">
+            <label class="float-left">Όνομα:</label><input class="float-right" type="text" name="onoma" required></input>
+        </div>
+        <div class="form-item">
+            <label>Tύπος υπηρεσίας:</label>
+            <select class="" required name="typos">
+                <option value=3>Καθημερινή</option>
+                <option value=4>Αργία</option>
+                <option value=5>Και τα δύο</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label>Τύπος προσωπικού:</label>
+            <select  class="" required name="proswpiko">
+                <option value=0>Στρατιώτης</option>
+                <option value=1>Μεταφραστής</option>
+                <option value=2>Ακροατής</option>
+            </select>
+        </div>
+        <input type="submit" id="btn-form" value="Δημιουργία"></input>
+    </form>
+</div>
+<div>
+    <p>Λίστα υπηρεσιών</p>
+ {{range .}}
+ <p>{{.Perigrafi}}</p>
+ <form action="deleteypiresia" method="POST">
+     <input type="hidden" name="id" value="{{.Id}}"></input>
+     <input type="submit" value="Διαγραφή">
+ </form>
+ {{end}}
+</div>
+{{end}}

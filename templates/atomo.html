@@ -1,0 +1,31 @@
+{{define "content"}}
+<div>
+    {{if eq .Typos 0}}
+    <p>{{.Name}} - Στρατιώτης</p>
+    {{end}}
+    {{if eq .Typos 1}}
+    <p>{{.Name}} - Μεταφραστής</p>
+    {{end}}
+    {{if eq .Typos 2}}
+    <p>{{.Name}} - Ακροατής</p>
+    {{end}}
+    <p>Προσθήκη άδειας</p>
+    <form action="createadeia" method="POST">
+        <label>Περιγραφή</label><input name="aitia" type="text"></input>
+        <label>Αρχή</label><input name="arxi" type="date"></input>
+        <label>Τέλος</label><input name="telos" type="date"></input>
+        <input type="hidden" name="atomo" value="{{.Id}}"></input>
+        <input type="submit" value="Καταχώρηση"></input>
+    </form>
+</div>
+<div>
+    <p>Λίστα αδειών</p>
+    {{range .Adeies}}
+    <p>{{.Arxi}} έως {{.Telos}}: {{.Aitia}}</p>
+    <form action="deleteadeia" method="POST">
+        <input type="hidden" name="id" value="{{.Id}}">
+        <input type="submit" value="Διαγραφή"></input>
+    </form>
+    {{end}}
+</div>
+{{end}}

@@ -1,0 +1,23 @@
+{{define "content"}}
+<div>
+    <form action="/createproswpiko" method="POST" id="formaproswpikou">
+        <label>Όνομα</label><input type="text" name="onoma" required></input>
+        <label>Τύπος προσωπικού</label><select required name="typos">
+            <option value=0>Στρατιώτης</option>
+            <option value=1>Μεταφραστής</option>
+            <option value=2>Ακροατής</option>
+        </select>
+        <input type="submit" id="btn-form" value="Δημιουργία"></input>
+    </form>
+</div>
+<div>
+    <p>Λίστα προσωπικού</p>
+    {{range .}}
+    <p><a href="retrieveproswpiko?id={{.Id}}">{{.Name}}</a>
+    <form action="/deleteproswpiko" method="POST">
+        <input type="hidden" name="id" value="{{.Id}}">
+        <input type="submit" value="Διαγραφή">
+    </form></p>
+    {{end}}
+</div>
+{{end}}
