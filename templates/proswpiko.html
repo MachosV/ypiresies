@@ -1,23 +1,45 @@
 {{define "content"}}
-<div>
-    <form action="/createproswpiko" method="POST" id="formaproswpikou">
-        <label>Όνομα</label><input type="text" name="onoma" required></input>
-        <label>Τύπος προσωπικού</label><select required name="typos">
+<h3>
+    Δημιουργία νέου ατόμου
+</h3><br>
+<div class="container-fluid">
+<form class="form" action="/createproswpiko" method="POST" id="formaproswpikou">
+    <div class="row form-group">
+        <label class="control-label col-form-label">Όνομα</label>
+        <div class="col-sm-6"><input type="text" name="onoma" required></input></div>
+    </div>
+    <div class="row form-group">
+        <label class="control-label col-form-label">Τύπος προσωπικού</label>                    
+        <div class="col-sm-6"><select required name="typos">
             <option value=0>Στρατιώτης</option>
             <option value=1>Μεταφραστής</option>
             <option value=2>Ακροατής</option>
-        </select>
-        <input type="submit" id="btn-form" value="Δημιουργία"></input>
+        </select></div>
+    </div>
+    <input class="btn btn-primary" type="submit" id="btn-form" value="Δημιουργία"></input>
     </form>
 </div>
+<br>
 <div>
-    <p>Λίστα προσωπικού</p>
-    {{range .}}
-    <p><a href="retrieveproswpiko?id={{.Id}}">{{.Name}}</a>
-    <form action="/deleteproswpiko" method="POST">
-        <input type="hidden" name="id" value="{{.Id}}">
-        <input type="submit" value="Διαγραφή">
-    </form></p>
-    {{end}}
+    <h3>Λίστα προσωπικού</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Όνομα</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .}}
+            <tr>
+                <td><p><a href="retrieveproswpiko?id={{.Id}}">{{.Name}}</a></td>
+                <td><form action="/deleteproswpiko" method="POST">
+                    <input type="hidden" name="id" value="{{.Id}}">
+                    <input class="btn btn-danger" type="submit" value="Διαγραφή">
+                </form></p></td>    
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
 </div>
 {{end}}

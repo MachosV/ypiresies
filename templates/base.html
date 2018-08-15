@@ -7,21 +7,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ιπποκράτης</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-    <div class="navbar">
-        <nav>
-            <a href="/">Αρχική</a>
-            <a href="/ypiresies">Υπηρεσίες</a>
-            <a href="/proswpiko">Προσωπικό</a>
-            <a href="/programma">Πρόγραμμα</a>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <ul class="navbar-nav">
+               <li class="nav-item">
+                   <a class="nav-link" href="/">Αρχική</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ypiresies">Υπηρεσίες</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/proswpiko">Προσωπικό</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/programma">Πρόγραμμα</a>
+                </li> 
+            </ul>
         </nav>
     </div>
+    <div class="container-fluid">
     {{template "content" .}}
-    <footer class="text-center">
-        <p>Βαλκανιώτης Τηλέμαχος, <i>valkaniotist@gmail.com</i></p>
-    </footer>
+    </div>
+    <div class="fixed-bottom">
+        <footer class="text-right">
+           <p>Βαλκανιώτης Τηλέμαχος, <i>valkaniotist@gmail.com</i></p>
+        </footer>
+    </div>
 </body>
 </html>
 

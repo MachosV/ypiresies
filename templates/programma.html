@@ -1,7 +1,7 @@
 {{define "content"}}
 <div>
     <form action="/getprogramma" method="POST">
-        <label>Τύπος προσωπικού</label><select required name="month">
+        <label>Μήνας</label><select required name="month">
             <option value=1>Ιανουάριος</option>
             <option value=2>Φεβρουάριος</option>
             <option value=3>Μάρτιος</option>
@@ -17,7 +17,7 @@
         </select>
         <label>Έτος</label>
         <input type="number" name="year" min="2018" max="2100" required>
-        <input type="submit" value="Δημιουργία"></input>
+        <input class="btn btn-primary" type="submit" value="Δημιουργία"></input>
     </form>
 </div>
 {{end}}

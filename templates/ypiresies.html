@@ -1,36 +1,58 @@
 {{define "content"}}
-<div class="formbox">
-    <form action="/createypiresia" method="POST">
-        <div class="form-item">
-            <label class="float-left">Όνομα:</label><input class="float-right" type="text" name="onoma" required></input>
+<h3>
+    Δημιουργία υπηρεσίας
+</h3>
+<div class="container-fluid">
+    <form class="form" action="/createypiresia" method="POST">
+        <div class="row form-group">
+            <label class="control-label col-form-label">Όνομα:</label>
+            <div class="col-sm-6">
+                <input type="text" name="onoma" required></input>
+            </div>
         </div>
-        <div class="form-item">
-            <label>Tύπος υπηρεσίας:</label>
-            <select class="" required name="typos">
-                <option value=3>Καθημερινή</option>
-                <option value=4>Αργία</option>
-                <option value=5>Και τα δύο</option>
-            </select>
+        <div class="row form-group">
+            <label class="control-label col-form-label">Tύπος υπηρεσίας:</label>
+            <div class="col-sm-6">
+                <select required name="typos">
+                    <option value=3>Καθημερινή</option>
+                    <option value=4>Αργία</option>
+                    <option value=5>Και τα δύο</option>
+                </select>
+            </div>
         </div>
-        <div class="form-item">
-            <label>Τύπος προσωπικού:</label>
-            <select  class="" required name="proswpiko">
-                <option value=0>Στρατιώτης</option>
-                <option value=1>Μεταφραστής</option>
-                <option value=2>Ακροατής</option>
-            </select>
+        <div class="row form-group">
+            <label class="control-label col-form-label">Τύπος προσωπικού:</label>
+            <div class="col-sm-6">
+                <select required name="proswpiko">
+                    <option value=0>Στρατιώτης</option>
+                    <option value=1>Μεταφραστής</option>
+                    <option value=2>Ακροατής</option>
+                </select>
+            </div>
         </div>
-        <input type="submit" id="btn-form" value="Δημιουργία"></input>
+        <input class="btn btn-primary" type="submit" id="btn-form" value="Δημιουργία"></input>
     </form>
-</div>
+</div><br>
 <div>
-    <p>Λίστα υπηρεσιών</p>
- {{range .}}
- <p>{{.Perigrafi}}</p>
- <form action="deleteypiresia" method="POST">
-     <input type="hidden" name="id" value="{{.Id}}"></input>
-     <input type="submit" value="Διαγραφή">
- </form>
- {{end}}
+    <h3>Λίστα υπηρεσιών</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Περιγραφή</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .}}
+            <tr>
+                <td><p>{{.Perigrafi}}</p></td>
+                <td><form action="deleteypiresia" method="POST">
+                        <input type="hidden" name="id" value="{{.Id}}"></input>
+                        <input class="btn btn-danger" type="submit" value="Διαγραφή">
+                    </form></td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
 </div>
 {{end}}

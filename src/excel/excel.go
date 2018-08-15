@@ -17,7 +17,7 @@ func BuildExcel(date time.Time) {
 	_ = row
 	var cell *xlsx.Cell
 	var err error
-	excelFileName := "Υπηρεσίες " + strconv.Itoa(datastorage.Year) + ".xlsx"
+	excelFileName := "Υπηρεσίες.xlsx"
 	sheetName := (date.Month().String() + " " + strconv.Itoa(datastorage.Year))
 	file, err = xlsx.OpenFile(excelFileName)
 	if err != nil {
@@ -55,7 +55,6 @@ func BuildExcel(date time.Time) {
 		cell = row.AddCell()
 		if d.Weekday().String() == "Sunday" {
 			style := GetStyle("grey")
-			fmt.Println(style)
 			cell.SetStyle(style)
 		}
 		cell.Value = strconv.Itoa(d.Day())
