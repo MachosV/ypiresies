@@ -12,6 +12,7 @@ func CalcYpiresiesAtomou(ypiresiesMina map[time.Time][]models.YpiresiaImeras) {
 			var ypiresiaAtomou models.YpiresiaAtomou
 			ypiresiaAtomou.Date = key
 			ypiresiaAtomou.OnomaYpiresias = ypiresiaImeras.Ypiresia.Perigrafi
+			ypiresiaAtomou.Color = ypiresiaImeras.Ypiresia.Color
 			if ypiresiaImeras.Atomo.Typos == datastorage.AKROATIS {
 				index := GetIndexOf(datastorage.Akroates, ypiresiaImeras.Atomo.Name)
 				(&datastorage.Akroates[index]).AddYpiresia(ypiresiaAtomou)

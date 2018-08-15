@@ -68,7 +68,7 @@ func LoadYpiresies() []models.Ypiresia {
 	var ypiresia models.Ypiresia
 	var ypiresies []models.Ypiresia
 	db := webstorage.GetDb()
-	res, err := db.Query("SELECT id,perigrafi,proswpiko,typos FROM ypiresia;")
+	res, err := db.Query("SELECT id,perigrafi,proswpiko,typos,color FROM ypiresia;")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -77,7 +77,8 @@ func LoadYpiresies() []models.Ypiresia {
 			&ypiresia.Id,
 			&ypiresia.Perigrafi,
 			&ypiresia.Proswpiko,
-			&ypiresia.Typos)
+			&ypiresia.Typos,
+			&ypiresia.Color)
 		if err != nil {
 			log.Fatal(err)
 		}

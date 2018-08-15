@@ -5,4 +5,5 @@ type Ypiresia struct {
 	Perigrafi string
 	Typos     int // CONST ARRAY
 	Proswpiko int //CONST ARRAY
+	Color     string
 }

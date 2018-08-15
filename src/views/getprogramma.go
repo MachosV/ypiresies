@@ -28,9 +28,8 @@ func getprogramma(w http.ResponseWriter, r *http.Request) {
 	}
 	date := time.Date(year, time.Month(month), 1, 0, 0, 0, 0, time.UTC)
 	algorithm.Algorithm(date)
-	os.Rename(filename, "Υπηρεσίες.xlsx")
-	filename = "Υπηρεσίες.xlsx"
-	f, err := os.Open("Υπηρεσίες.xlsx")
+	os.Rename("temp.xlsx", filename)
+	f, err := os.Open(filename)
 	if err != nil {
 		log.Fatal("Error opening file, /getprogramma")
 	}

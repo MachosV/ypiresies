@@ -1,8 +1,10 @@
 package excel
 
 import (
+	"argies"
 	"datastorage"
 	"fmt"
+	"models"
 	"sort"
 	"strconv"
 	"time"
@@ -17,7 +19,7 @@ func BuildExcel(date time.Time) {
 	_ = row
 	var cell *xlsx.Cell
 	var err error
-	excelFileName := "Υπηρεσίες.xlsx"
+	excelFileName := "temp.xlsx"
 	sheetName := (date.Month().String() + " " + strconv.Itoa(datastorage.Year))
 	file, err = xlsx.OpenFile(excelFileName)
 	if err != nil {
@@ -49,53 +51,37 @@ func BuildExcel(date time.Time) {
 	sort.Slice(datastorage.Stratiwtes, func(i, j int) bool {
 		return datastorage.Stratiwtes[i].Name < datastorage.Stratiwtes[j].Name
 	})
+	var atoma []models.Atomo
+	atoma = append(atoma, datastorage.Metafrastes...)
+	atoma = append(atoma, datastorage.Akroates...)
+	atoma = append(atoma, datastorage.Stratiwtes...)
 	row = sheet.AddRow()
 	cell = row.AddCell()
 	for d := date; d.Month() == date.Month(); d = d.AddDate(0, 0, 1) {
 		cell = row.AddCell()
-		if d.Weekday().String() == "Sunday" {
-			style := GetStyle("grey")
+		if d.Weekday().String() == "Sunday" || d.Weekday().String() == "Saturday" || argies.IsArgia(d) {
+			style := GetStyle("FFD8D8D8")
 			cell.SetStyle(style)
 		}
 		cell.Value = strconv.Itoa(d.Day())
 	}
-	for _, atomo := range datastorage.Metafrastes {
+	for _, atomo := range atoma {
 		row = sheet.AddRow()
 		cell = row.AddCell()
 		cell.Value = atomo.Name
 		for d := date; d.Month() == date.Month(); d = d.AddDate(0, 0, 1) {
 			cell = row.AddCell()
+			if d.Weekday().String() == "Sunday" || d.Weekday().String() == "Saturday" || argies.IsArgia(d) {
+				style := GetStyle("FFD8D8D8")
+				cell.SetStyle(style)
+			}
 		}
 		for _, ypiresia := range atomo.YpiresiesAtomou {
 			cell = row.Cells[ypiresia.Date.Day()]
+			cell.SetStyle(GetStyle(ypiresia.Color))
 			cell.Value = ypiresia.OnomaYpiresias
 		}
 	}
-	for _, atomo := range datastorage.Akroates {
-		row = sheet.AddRow()
-		cell = row.AddCell()
-		cell.Value = atomo.Name
-		for d := date; d.Month() == date.Month(); d = d.AddDate(0, 0, 1) {
-			cell = row.AddCell()
-		}
-		for _, ypiresia := range atomo.YpiresiesAtomou {
-			cell = row.Cells[ypiresia.Date.Day()]
-			cell.Value = ypiresia.OnomaYpiresias
-		}
-	}
-	for _, atomo := range datastorage.Stratiwtes {
-		row = sheet.AddRow()
-		cell = row.AddCell()
-		cell.Value = atomo.Name
-		for d := date; d.Month() == date.Month(); d = d.AddDate(0, 0, 1) {
-			cell = row.AddCell()
-		}
-		for _, ypiresia := range atomo.YpiresiesAtomou {
-			cell = row.Cells[ypiresia.Date.Day()]
-			cell.Value = ypiresia.OnomaYpiresias
-		}
-	}
-
 	err = file.Save(excelFileName)
 	if err != nil {
 		fmt.Printf(err.Error())
