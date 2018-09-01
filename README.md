@@ -12,3 +12,6 @@
 
 Εγινε refactor του κωδικα. Σιγουρα δεχεται κι αλλες βελτιωσεις, αλλα εχω κι αλλα projects κατα νου.
 Τι εννοεις θελει csrf αντιμετρα?? :)
+
+build for windows with
+CC=i686-w64-mingw32-gcc-win32 GOOS=windows GOARCH=386 CGO_ENABLED=1 go build -o ippokratis.exe web.go

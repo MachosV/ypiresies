@@ -13,7 +13,7 @@ func IsArgia(date time.Time) bool {
 			return true
 		}
 	}
-	if date.Weekday().String() == "Sunday" {
+	if date.Weekday().String() == "Sunday" || date.Weekday().String() == "Saturday" {
 		return true
 	}
 	return false
