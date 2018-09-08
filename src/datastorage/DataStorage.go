@@ -44,7 +44,7 @@ func LoadAtoma(typos int) []models.Atomo {
 	var atomo models.Atomo
 	var atoma []models.Atomo
 	db := webstorage.GetDb()
-	res, err := db.Query("SELECT id,onoma FROM proswpiko where typos = ?", typos)
+	res, err := db.Query("SELECT id,onoma FROM proswpiko where typos = ? ORDER BY onoma", typos)
 	if err != nil {
 		log.Fatal(err)
 	}

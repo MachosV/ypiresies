@@ -20,7 +20,34 @@
     </form>
 </div>
 <br>
-<div>
+<div class="container">
+    <div class="row">
+        {{if .Metafrastes}}
+        <div class="col">
+            <h2>Μεταφραστές</h2>
+        {{range .Metafrastes}}
+        <p><a href="retrieveproswpiko?id={{.Id}}">{{.Name}}</a></p>
+        {{end}}
+        </div>
+        {{end}}
+        {{if .Akroates}}
+        <div class="col">
+            <h2>Ακροατές</h2>
+            {{range .Akroates}}
+            <p><a href="retrieveproswpiko?id={{.Id}}">{{.Name}}</a></p>
+            {{end}}
+        </div>
+        {{end}}
+        {{if .Stratiwtes}}
+        <div class="col">
+                <h2>Στρατιώτες</h2>
+            {{range .Stratiwtes}}
+            <p><a href="retrieveproswpiko?id={{.Id}}">{{.Name}}</a></p>
+            {{end}}
+        </div>{{end}}
+    </div>
+</div>
+<!--<div>
     <h3>Λίστα προσωπικού</h3>
     <table class="table">
         <thead>
@@ -41,5 +68,5 @@
             {{end}}
         </tbody>
     </table>
-</div>
+</div>-->
 {{end}}

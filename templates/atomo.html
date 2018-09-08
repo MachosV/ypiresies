@@ -12,6 +12,10 @@
                         {{if eq .Typos 2}}
                         Ακροατής
                         {{end}}</p>
+                        <form action="/deleteproswpiko" method="POST">
+                            <input type="hidden" name="id" value="{{.Id}}">
+                            <input class="btn btn-danger" type="submit" value="Διαγραφή">
+                        </form>
                 </div>
               </div><br>
     <h3>Προσθήκη άδειας</h3>

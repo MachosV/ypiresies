@@ -1,6 +1,7 @@
 package views
 
 import (
+	"datastorage"
 	"fmt"
 	"models"
 	"net/http"
@@ -12,30 +13,23 @@ func init() {
 	mux.HandleFunc("/proswpiko", proswpiko)
 }
 
+type Context struct {
+	Metafrastes []models.Atomo
+	Akroates    []models.Atomo
+	Stratiwtes  []models.Atomo
+}
+
 func proswpiko(w http.ResponseWriter, r *http.Request) {
-	adeies := []models.Adeia{}
-	ypiresies := []models.YpiresiaAtomou{}
-	proswpiko := []models.Atomo{}
-	db := webstorage.GetDb()
-	rows, err := db.Query("SELECT * FROM proswpiko;")
-	if err != nil {
-		fmt.Fprintf(w, "Database error %s\n", err.Error())
-		return
-	}
-	atomo := models.Atomo{}
-	for rows.Next() {
-		atomo.Adeies = adeies
-		atomo.YpiresiesAtomou = ypiresies
-		err = rows.Scan(
-			&atomo.Id,
-			&atomo.Name,
-			&atomo.Typos)
-		proswpiko = append(proswpiko, atomo)
-	}
-	rows.Close()
+	metafrastes := datastorage.LoadAtoma(datastorage.METAFRASTIS)
+	akroates := datastorage.LoadAtoma(datastorage.AKROATIS)
+	stratiwtes := datastorage.LoadAtoma(datastorage.STRATIWTIS)
+	var context Context
+	context.Metafrastes = metafrastes
+	context.Akroates = akroates
+	context.Stratiwtes = stratiwtes
 	var t = webstorage.GetTemplate("proswpiko.html")
 	if t != nil {
-		t.ExecuteTemplate(w, "base", proswpiko)
+		t.ExecuteTemplate(w, "base", context)
 	} else {
 		fmt.Fprintf(w, "Error loading proswpiko.html")
 	}
