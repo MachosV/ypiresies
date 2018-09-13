@@ -47,26 +47,4 @@
         </div>{{end}}
     </div>
 </div>
-<!--<div>
-    <h3>Λίστα προσωπικού</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Όνομα</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {{range .}}
-            <tr>
-                <td><p><a href="retrieveproswpiko?id={{.Id}}">{{.Name}}</a></td>
-                <td><form action="/deleteproswpiko" method="POST">
-                    <input type="hidden" name="id" value="{{.Id}}">
-                    <input class="btn btn-danger" type="submit" value="Διαγραφή">
-                </form></p></td>    
-            </tr>
-            {{end}}
-        </tbody>
-    </table>
-</div>-->
 {{end}}
